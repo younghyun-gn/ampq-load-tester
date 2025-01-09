@@ -1,0 +1,28 @@
+[package]
+name = "knockknock-mq-publisher"
+version = "0.1.0"
+edition = "2021"
+
+[profile.release]
+opt-level = 3
+codegen-units = 1
+debug = false
+incremental = false
+strip = true
+lto = true
+panic = "abort"
+
+[dependencies]
+anyhow = "1.0.95"
+futures-lite = "2.5.0"
+lapin = "2.5.0"
+num_cpus = "1.16.0"
+rand = "0.8.5"
+tokio = { version = "1.43.0", features = [
+    "macros",
+    "rt-multi-thread",
+    "time",
+    "sync",
+] }
+tracing = "0.1.41"
+tracing-subscriber = "0.3.19"
