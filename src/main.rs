@@ -40,6 +40,7 @@ async fn main() -> Result<()> {
             let mut previous_total = 0;
             loop {
                 sleep(Duration::from_secs(1)).await;
+                let start = tokio::time::Instant::now();
                 let current_total = published.load(Ordering::Relaxed);
                 let send_rate = current_total - previous_total;
                 info!(
@@ -47,6 +48,7 @@ async fn main() -> Result<()> {
                     send_rate, current_total
                 );
                 previous_total = current_total;
+                info!("Time elapsed: {:?}", start.elapsed());
             }
         }
     });
